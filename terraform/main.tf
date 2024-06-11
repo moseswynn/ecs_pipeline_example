@@ -1,4 +1,9 @@
 terraform {
+    backend "s3" {
+        bucket="mwtf"
+        key="terraform/ecs-pipelines"
+        region="us-west-2"
+    }
     required_providers {
         aws = {
             source = "hashicorp/aws"
