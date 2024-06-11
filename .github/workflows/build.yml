@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'Dockerfile'
-      - 'terraform/**'
-      - 'ecs_pipelines/**'
-      - 'pyproject.toml'
-      - 'requirements.txt'
-      - 'run.py'
+    # paths:
+    #   - 'Dockerfile'
+    #   - 'terraform/**'
+    #   - 'ecs_pipelines/**'
+    #   - 'pyproject.toml'
+    #   - 'requirements.txt'
+    #   - 'run.py'
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
