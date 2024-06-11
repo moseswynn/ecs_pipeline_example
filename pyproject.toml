@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ecs_pipelines"
+version = "0.1.0"
+description = "ecs pipeline repo"
+authors = ["Moses <mail@moseswynn.com>"]
+packages = [
+    { include = "ecs_pipelines" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
