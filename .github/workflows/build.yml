@@ -53,13 +53,13 @@ jobs:
           cd ..
       -
         name: Build and Push Docker Container
-        env:
-          ECR_URL: ${{ steps.creds.outputs.aws-account-id }}.dkr.ecr.us-west-2.amazonaws.com
-        run: |
-          aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ECR_URL
-          docker buildx build --platform=amd64 -t ecs-pipelines .
-          docker tag ecs-pipelines:latest ${{ steps.containerrepo.outputs.image-url }}:latest
-          docker push "${{ steps.containerrepo.outputs.image-url }}":latest
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ steps.containerrepo.outputs.image-url }}:latest
       -
         name: Finish Terraform Deploy
         env:
