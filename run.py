@@ -13,7 +13,7 @@ def main(pipeline_name, stream):
     logging.info(f'Loading Job Runner for {"stream" if stream else "pipeline"} {pipeline_name}.')
 
     if stream:
-        runner = importlib.import_module(f'ecs_pipelines.streams.{pipeline_name}', 'ecs_pipelines')
+        runner = importlib.import_module(f'ecs_pipelines.stream.{pipeline_name}', 'ecs_pipelines')
     else:
         runner = importlib.import_module(f'ecs_pipelines.batch.{pipeline_name}', 'ecs_pipelines')
 
