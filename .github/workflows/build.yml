@@ -49,7 +49,7 @@ jobs:
           cd terraform
           terraform init -input=false
           terraform apply -target=aws_ecr_repository.image_repository -input=false -compact-warnings -auto-approve
-          echo "image-url=$(terraform output -raw ecr_repo_url)\n" >> $GITHUB_OUTPUT
+          echo "image-url=$(terraform output -raw ecr_repo_url)" >> $GITHUB_OUTPUT
           cd ..
       -
         name: Build and Push Docker Container
