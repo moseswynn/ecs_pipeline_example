@@ -59,7 +59,7 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ steps.containerrepo.outputs.image-url }}:latest
+            "${{ steps.containerrepo.outputs.image-url }}:latest"
       -
         name: Finish Terraform Deploy
         env:
