@@ -42,6 +42,9 @@ jobs:
       -
         name: Deploy Container Repository
         id: containerrepo
+        env:
+          TF_VAR_aws_account_id: ${{ steps.creds.outputs.aws-account-id }}
+          TF_VAR_image_url: ""
         run: |
           cd terraform
           terraform init -input=false
