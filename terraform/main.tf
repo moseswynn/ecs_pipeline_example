@@ -19,6 +19,7 @@ provider "aws" {
 # container image repository
 resource "aws_ecr_repository" "image_repository" {
     name = "ecs-pipelines"
+    force_delete = true
 }
 
 output "ecr_repo_url" {
