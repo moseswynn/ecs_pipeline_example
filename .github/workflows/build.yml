@@ -52,6 +52,10 @@ jobs:
           echo "image-url=$(terraform output -raw ecr_repo_url)" >> $GITHUB_OUTPUT
           cd ..
       -
+        name: Login to ECR
+        run: |
+          aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${{ creds.outputs.aws-account-id }}.dkr.ecr.us-west-2.amazonaws.com
+      -
         name: Build and Push Docker Container
         uses: docker/build-push-action@v5
         with:
