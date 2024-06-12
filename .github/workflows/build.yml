@@ -57,7 +57,7 @@ jobs:
           ECR_URL: ${{ steps.creds.outputs.aws-account-id }}.dkr.ecr.us-west-2.amazonaws.com
         run: |
           aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ECR_URL
-          docker buildx build -t ecs-pipelines:latest .
+          docker buildx build -t ecs-pipelines .
           docker tag ecs-pipelines:latest ${{ steps.containerrepo.outputs.image-url }}:latest
           docker push "${{ steps.containerrepo.outputs.image-url }}":latest
       -
