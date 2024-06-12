@@ -1,0 +1,36 @@
+name: Docker Build and Terraform Deploy
+run-name: ${{ github.actor }} is running Terraform Deploy on ${{ github.ref_name }}
+on:
+  push:
+    branches:
+      - destroy
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+      -
+        name: Configure AWS Credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-west-2
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          output-credentials: true
+      -
+        name: Terraform Destroy
+        env:
+          TF_VAR_aws_account_id: ${{ steps.creds.outputs.aws-account-id}}
+          TF_VAR_image_url: ""
+        run: |
+          cd terraform
+          terraform destroy -input=false -compact-warnings -auto-approve
