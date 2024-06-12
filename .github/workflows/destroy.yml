@@ -33,4 +33,5 @@ jobs:
           TF_VAR_image_url: ""
         run: |
           cd terraform
+          terraform init
           terraform destroy -input=false -compact-warnings -auto-approve
